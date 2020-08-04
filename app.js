@@ -1,8 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 const placesRoutes = require("./routes/places-routes");
 const usersRoutes = require("./routes/users-routes");
+const { DB_URL } = require("./d-priv/d-data");
 
 const HttpError = require("./models/http-error");
 
@@ -26,4 +28,12 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "An unknown error occured" });
 });
 
-app.listen(5000);
+mongoose
+  .connect(DB_URL)
+  .then(() => {
+    console.log("DB Connect OK");
+    app.listen(5000);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
