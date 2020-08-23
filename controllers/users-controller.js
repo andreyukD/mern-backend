@@ -37,7 +37,7 @@ const signup = async (req, res, next) => {
   const createdUser = new User({
     name,
     email,
-    image: "http://lorempixel.com/400/200/sports/",
+    image: req.file.path,
     password,
     places: [],
   });
