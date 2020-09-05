@@ -72,7 +72,7 @@ const signup = async (req, res, next) => {
   }
 
   res.status(201).json({
-    userId: createdUser.isDirectModified,
+    userId: createdUser.id,
     email: createdUser.email,
     token: token,
   });
